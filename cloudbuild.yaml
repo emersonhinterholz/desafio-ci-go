@@ -6,13 +6,20 @@ steps:
 
 - id: "Building Docker Image"
   name: "gcr.io/cloud-builders/docker"
-  args: ["build", "-t", "$PROJECT_ID/desafio-ci-go", "."]
+  args: ["build", "-t", "desafio-ci-go", "."]
 
-- id: "Running Local Container"
+- id: "Building and Running container from Local Image"
   name: "gcr.io/cloud-builders/docker"
-  args: ["run", "$PROJECT_ID/desafio-ci-go"]
+  args: ["run", "desafio-ci-go"]
+
+- id: "Tagging Image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["tag", "desafio-ci-go", "gcr.io/$PROJECT_ID/desafio-ci-go:latest"]
 
 - id: "Pushing Image"
   name: "gcr.io/cloud-builders/docker"
-  args: ["push", "gcr.io/$PROJECT_ID/desafio-ci-go"]
+  args: ["push", "gcr.io/$PROJECT_ID/desafio-ci-go:latest"]
 
+- id: "Building and Running container from Remote Image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["run", "gcr.io/$PROJECT_ID/desafio-ci-go:latest"]
