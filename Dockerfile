@@ -6,13 +6,11 @@ RUN apt-get update -y \
 RUN mkdir /app
 COPY /src/main.go /app/
 
-RUN ls /
-RUN ls /app
-
 WORKDIR /app
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags "-s -w" -o main main.go \
-    && upx --brute server \
-    && ls -l
+RUN go build -o main main.go
+#RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags "-s -w" -o main main.go \
+#    && upx --brute server \
+#    && ls -l
 
 FROM scratch
 COPY --from=builder /app/server /
