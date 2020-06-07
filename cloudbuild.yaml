@@ -9,5 +9,5 @@ steps:
   args: ["build", "-t", "$PROJECT_ID/desafio-ci-go", "."]
 
 - id: "Running Container"
-  name: "gcr.io/$PROJECT_ID/desafio-ci-go"
+  name: "$PROJECT_ID/desafio-ci-go"
   args: ["run"]
