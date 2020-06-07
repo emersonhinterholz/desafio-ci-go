@@ -13,5 +13,5 @@ RUN go build -o main main.go
 #    && ls -l
 
 FROM scratch
-COPY --from=builder /app/server /
+COPY --from=builder /app/main /
 CMD ["/main"]
