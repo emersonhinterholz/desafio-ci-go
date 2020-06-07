@@ -7,7 +7,6 @@ RUN mkdir /app
 COPY /src/main.go /app/
 
 RUN ls /
-RUN ls /src
 RUN ls /app
 
 WORKDIR /app
