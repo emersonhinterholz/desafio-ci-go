@@ -6,4 +6,8 @@ steps:
 
 - id: "Building Docker Image"
   name: "gcr.io/cloud-builders/docker"
-  args: ["build", "."]
+  args: ["build", "-t", "$PROJECT_ID/desafio-ci-go", "."]
+
+- id: "Running Container"
+  name: "gcr.io/$PROJECT_ID/desafio-ci-go"
+  args: ["run"]
