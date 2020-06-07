@@ -1,0 +1,9 @@
+steps:
+
+- id: "Running Unit Tests"
+  name: "gcr.io/cloud-builders/go"
+  args: ["test", "./src/main.go", "./src/main_test.go"]
+
+- id: "Building Docker Image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["build"]
