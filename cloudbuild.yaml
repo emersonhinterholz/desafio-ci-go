@@ -6,4 +6,4 @@ steps:
 
 - id: "Building Docker Image"
   name: "gcr.io/cloud-builders/docker"
-  args: ["build"]
+  args: ["build", "."]
