@@ -1,0 +1,43 @@
+steps:
+
+- id: "Running Unit Tests"
+  name: "gcr.io/cloud-builders/go"
+  args: ["test", "./src/main.go", "./src/main_test.go"]
+
+- id: "Building Docker Image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["build", "-t", "desafio-ci-go", "."]
+
+- id: "Building Docker Image Web"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["build", "-t", "desafio-ci-go-web", "-f", "DockerfileWeb", "."]
+
+- id: "Building and Running container from Local Image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["run", "desafio-ci-go"]
+
+- id: "Tagging Image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["tag", "desafio-ci-go", "gcr.io/$PROJECT_ID/desafio-ci-go:latest"]
+
+- id: "Pushing Image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["push", "gcr.io/$PROJECT_ID/desafio-ci-go:latest"]
+
+- id: "Pushing Image Web"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["push", "gcr.io/$PROJECT_ID/desafio-ci-go-web:latest"]
+
+- id: "Building and Running container from Remote Image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["run", "gcr.io/$PROJECT_ID/desafio-ci-go:latest"]
+
+- id: "Deploying k8s"
+  name: "gcr.io/cloud-builders/kubectl"
+  args:
+    - "apply"
+    - "-f"
+    - "./k8s/"
+  env:
+    - "CLOUDSDK_COMPUTE_ZONE=us-central1-c"
+    - "CLOUDSDK_CONTAINER_CLUSTER=cluster-1"
