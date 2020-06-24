@@ -2,6 +2,8 @@ package main
 
 import (
 	"testing"
+
+	"../utils"
 )
 
 func TestSum(t *testing.T) {
@@ -16,7 +18,7 @@ func TestSum(t *testing.T) {
 		{x: 2, y: 4, want: 6},
 	}
 	for _, tt := range tests {
-		if got := Sum(tt.x, tt.y); got != tt.want {
+		if got := utils.Sum(tt.x, tt.y); got != tt.want {
 			t.Errorf("sum(%v, %v) = %v, want %v", tt.x, tt.y, got, tt.want)
 		}
 	}
