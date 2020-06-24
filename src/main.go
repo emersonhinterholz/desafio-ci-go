@@ -7,9 +7,10 @@ import (
 func main() {
 	const x = 5
 	const y = 5
-	fmt.Println(x, "+", y, "=", sum(x, y))
+	fmt.Println(x, "+", y, "=", Sum(x, y))
 }
 
-func sum(x int, y int) int {
+/*Sum is the sum function exported*/
+func Sum(x int, y int) int {
 	return x + y
 }
