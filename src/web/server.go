@@ -1,8 +1,10 @@
-package main
+package server
 
 import (
 	"fmt"
 	"net/http"
+
+	"../utils"
 )
 
 func server() {
@@ -11,5 +13,5 @@ func server() {
 }
 
 func helloServer(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(fmt.Sprintf("Code Rocks! 2 + 2 = %d", Sum(2, 2))))
+	w.Write([]byte(fmt.Sprintf("Code Rocks! 2 + 2 = %d", utils.Sum(2, 2))))
 }
