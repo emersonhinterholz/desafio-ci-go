@@ -45,7 +45,7 @@ steps:
       sed "s#dgoweb-image#gcr.io/$PROJECT_ID/desafio-ci-go:latest#g" ./k8s/deployment.yaml > ./k8s/deployment-new.yaml;
       cat ./k8s/deployment-new.yaml;
 
-- id: "Deploying k8s"
+- id: "Deploying k8s - deployment"
   name: "gcr.io/cloud-builders/kubectl"
   args:
     - "apply"
@@ -55,7 +55,7 @@ steps:
     - "CLOUDSDK_COMPUTE_ZONE=us-central1-c"
     - "CLOUDSDK_CONTAINER_CLUSTER=cluster-1"
 
-- id: "Deploying k8s"
+- id: "Deploying k8s - service"
   name: "gcr.io/cloud-builders/kubectl"
   args:
     - "apply"
