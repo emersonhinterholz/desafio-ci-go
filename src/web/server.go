@@ -1,15 +1,16 @@
-package server
+package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"../utils"
 )
 
-func server() {
+func main() {
 	http.HandleFunc("/", helloServer)
-	http.ListenAndServe(":80", nil)
+	log.Fatal(http.ListenAndServe(":80", nil))
 }
 
 func helloServer(w http.ResponseWriter, r *http.Request) {
